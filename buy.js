@@ -47,13 +47,15 @@ document.getElementById('orderForm').addEventListener('submit', async function (
 
   const endpoint = 'https://script.google.com/macros/s/AKfycby4-Y8ZjkMLPS8Sc5Or_ErlUSAHetkMxHul8Pw7xEt0xCaVfxpjm0V_dG40JWEWE78P2g/exec';
   try {
-    const res = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    });
+const res = await fetch(endpoint, {
+  method: 'POST',
+  mode: 'cors', // Tambahan penting untuk CORS
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(data)
+});
+
 
     const result = await res.text();
     if (result.includes("Berhasil")) {
