@@ -43,7 +43,7 @@ document.getElementById('orderForm').addEventListener('submit', async function (
     email: form.email.value.trim()
   };
 
-  const endpoint = 'https://script.google.com/macros/s/AKfycby4-Y8ZjkMLPS8Sc5Or_ErlUSAHetkMxHul8Pw7xEt0xCaVfxpjm0V_dG40JWEWE78P2g/exec';
+  const endpoint = 'https://script.google.com/macros/s/AKfycbzNccedOFxMKWkxXo7EOuwsWliQDyu13kN6jMSZZPwHHR2c5aPdke9K_iNpgrTdWUMVUQ/exec';
 
   try {
     const res = await fetch(endpoint, {
