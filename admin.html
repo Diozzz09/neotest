@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="admin.css" />
+  
+  <!-- Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+  <h1>Panel Admin - Data Order</h1>
+
+  <!-- Google Sign In Button -->
+  <div id="g_id_signin"></div>
+
+  <!-- Konten admin, tersembunyi sampai login berhasil -->
+  <div id="adminContent" style="display:none;">
+    <div class="table-container">
+      <table id="orderTable">
+        <thead>
+          <tr>
+            <th>No Pembeli</th>
+            <th>No Pesanan</th>
+            <th>Username</th>
+            <th>Jenis Orderan</th>
+            <th>Jumlah Orderan</th>
+            <th>Harga</th>
+            <th>Metode Pembayaran</th>
+            <th>Kode Promo</th>
+            <th>WA</th>
+            <th>Email</th>
+            <th>Tanggal</th>
+            <th>Aksi</th> <!-- Tombol Simpan / Edit -->
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    // Daftar email admin yang boleh akses
+    const ADMIN_EMAILS = [
+      "ari.chevy182@gmail.com",
+      "admin2@gmail.com"
+    ];
+
+    function handleCredentialResponse(response) {
+      // Decode JWT token Google
+      const payload = JSON.parse(atob(response.credential.split('.')[1]));
+      const email = payload.email;
+
+      if (ADMIN_EMAILS.includes(email)) {
+        document.getElementById('g_id_signin').style.display = 'none';
+        document.getElementById('adminContent').style.display = 'block';
+        console.log("Login berhasil sebagai:", email);
+
+        // TODO: Panggil fungsi untuk load data order di sini
+        loadOrderData();
+      } else {
+        alert("Akses ditolak. Email ini bukan admin.");
+        // Bisa redirect ke halaman lain jika perlu:
+        // window.location.href = "index.html";
+      }
+    }
+
+    window.onload = function () {
+      google.accounts.id.initialize({
+        client_id: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
+        callback: handleCredentialResponse
+      });
+
+      google.accounts.id.renderButton(
+        document.getElementById("g_id_signin"),
+        { theme: "outline", size: "large" }  // opsi tampilan tombol
+      );
+
+      google.accounts.id.prompt(); // munculkan popup login otomatis (opsional)
+    };
+
+    // Contoh fungsi dummy untuk load data order (isi sesuai kebutuhanmu)
+    function loadOrderData() {
+      const tbody = document.querySelector('#orderTable tbody');
+      tbody.innerHTML = `
+        <tr>
+          <td>1</td>
+          <td>ORDER-123456789</td>
+          <td>Player123</td>
+          <td>Robux</td>
+          <td>1000</td>
+          <td>Rp 15,000</td>
+          <td>QRIS</td>
+          <td></td>
+          <td>+628123456789</td>
+          <td>player123@mail.com</td>
+          <td>2025-05-17</td>
+          <td><button>Simpan</button></td>
+        </tr>
+      `;
+    }
+  </script>
+
+  <script src="admin.js" defer></script>
+</body>
+</html>

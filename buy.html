@@ -1,0 +1,50 @@
+<!-- buy.html -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beli Robux</title>
+  <link rel="stylesheet" href="buy.css">
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Logo" class="logo">
+  </header>
+
+  <main>
+    <section class="banner"></section>
+
+    <!-- buy.html -->
+ <form id="orderForm">
+  <input type="text" placeholder="Username Roblox" name="username" required>
+  <input type="number" placeholder="Jumlah R$" name="jumlah_orderan" id="jumlah_orderan" required>
+  <!-- Tampilkan harga di sini -->
+  <label for="price_display">Harga (Rp)</label>
+  <span id="price_display">Rp 0</span>
+
+<!-- Hidden input untuk dikirim ke server -->
+<input type="hidden" name="price" id="price">
+
+
+  <!-- Hidden price input (tidak bisa diubah oleh pembeli) -->
+  <input type="hidden" name="price" id="price">
+
+  <select name="payment" required>
+    <option value="">Pilih Metode Pembayaran</option>
+    <option value="QRIS">QRIS</option>
+    <option value="Dana">Dana</option>
+    <option value="OVO">OVO</option>
+  </select>
+
+  <input type="text" placeholder="Kode Promo (opsional)" name="promo">
+  <input type="text" placeholder="Nomor WhatsApp" name="wa" required>
+  <input type="email" placeholder="Email Pembeli" name="email" required>
+
+  <button type="submit">Beli Sekarang</button>
+ </form>
+  </main>
+
+  <script src="buy.js"></script>
+</body>
+</html>
